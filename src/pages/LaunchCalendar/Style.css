@@ -1,0 +1,330 @@
+h1.TopHeading {
+    color: #000;
+    text-align: left;
+    font-family: Montserrat;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+}
+.ProductImg img {
+    height: 85px;
+    width: 85px;
+    border: 1px solid #efefef;
+    border-radius: 100px;
+}
+.timeline {
+    list-style: none;
+    /* counter-reset: counter; */
+    position: relative;
+    color: rgb(17, 17, 17);
+}
+.timeline>li::before, .timelineHolder01 {
+    /* content: counter(counter, decimal-leading-zero); */
+    position: absolute;
+    padding: 16px;
+    width: 60px;
+    height: 60px;
+    left: 0;
+    color: #237C94;  
+    text-align: center;
+    background-color: #ECFBFF;
+    font-size: 18px;    
+    border-radius: 100px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+    z-index: 1;
+    letter-spacing: 1.2px;
+    font-family: 'Montserrat';
+}
+
+.timeline>li>.timeline-content {
+    border: 1px solid white;
+    margin-bottom: 25px;
+    background-color: #fff;
+    
+    border-radius: 10px;
+    border: 1px dashed #000;
+}
+.timeline-content {
+    width: 95%;
+    padding: 12px 16px;
+    margin-left: 50px;
+}
+.DateCurrent01 {
+    background-color: #ecfbff;
+    color: #237ca2;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 3px 8px;
+    width: 155px;
+    border-radius: 6px;
+    text-align: center;
+    letter-spacing: 1.2px;
+}
+.DateCurrent02 {
+    background-color: #eaffee;
+    color: #3c9a4e;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 3px 8px;
+    width: 155px;
+    border-radius: 6px;
+    text-align: center;
+    letter-spacing: 1.2px;
+  }
+  .DateCurrent03 {
+    background-color: #ffdcdc;
+    color: #9e4545;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 3px 8px;
+    width: 155px;
+    border-radius: 6px;
+    text-align: center;
+    letter-spacing: 1.2px;
+  }
+  
+.LaunchProductDetail {
+    margin-left: 20px;
+    font-family: 'Montserrat';
+}
+.LaunchProductDetail h3{
+    color: #000;
+    font-family: 'Montserrat';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+.size {
+    color: #9C9C9C;
+    font-family: Arial;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1.12px;
+    margin-bottom: 8px;
+}
+span.ProductQty {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    margin-left: 10px;
+    padding: 2px 8px;
+    border-radius: 7px;
+    text-transform: uppercase;
+}
+.LaunchProductDetail p {
+    color: #000;
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 1.12px;
+}
+
+.timeline>li::after {
+    display: block;
+    position: absolute;
+    content: "";
+    width: 2px;
+    top: 60px;
+    bottom: -25px;
+    left: 28px;
+    background-color: #ebebeb;
+    z-index: 0;
+    border: 1px dotted #000;
+}
+
+.LaunchProductDetail {
+    margin-left: 20px;
+}
+.timeline>li::before,
+.timelineHolder02 {
+  /* content: counter(counter, decimal-leading-zero); */
+  position: absolute;
+  padding: 16px;
+
+  width: 60px;
+  height: 60px;
+  left: 0;
+  color: #3C9A4E;
+  font-size: 18px;
+  text-align: center;
+  background-color: #EAFFEE;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 100px;
+  text-transform: uppercase;
+  display: flex;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+  z-index: 1;
+  letter-spacing: 1.2px;
+  font-family: 'Montserrat';
+}
+
+.timeline>li::before,
+.timelineHolder03 {
+  /* content: counter(counter, decimal-leading-zero); */
+  position: absolute;
+  padding: 16px;
+
+  width: 60px;
+  height: 60px;
+  left: 0;
+  color: #9E4545;
+  font-size: 18px;
+  text-align: center;
+  background-color: #FFDCDC;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 100px;
+  text-transform: uppercase;
+  display: flex;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+  z-index: 1;
+  letter-spacing: 1.2px;
+  font-family: 'Montserrat';
+}
+
+.launchBrand img{
+    border-radius: unset;
+   
+    display: flex;
+}
+.timeline-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.ProductInfo{
+    border-right: 1px dashed #000;
+    margin-right: 20px;
+    width: 90%;
+}
+.GrayBg{
+    border-radius: 8px;
+    background: #F5F5F5;
+}
+
+.PlusBtn {
+    padding: 35px;
+}
+.AddNewInner {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #D5D9D9;
+    text-align: center;
+    padding: 40px 10px;
+
+}
+
+.AddNewInner p{
+    color: #b5b5b5;
+text-align: center;
+font-family: Montserrat;
+font-size: 25px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 2.5px;
+margin-bottom: 0;
+}
+
+/* Add new css 17-01-2024*/
+.ShipDate{
+    display: flex;
+    align-items: center;
+}
+.ShipDate span{
+    margin-right: 8px;
+}
+.DateAlignEOD{
+    display: flex;
+    justify-content: space-between;
+}
+.AddNewInner button.btn.btn-btn {
+    display: none;
+}
+/* B2B PortAL  */
+.ShipDate{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.BothDateTopFlex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.DateEod{
+    font-size: 15px;
+    font-weight: 500;
+    padding: 3px 8px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    
+    text-align: center;
+    letter-spacing: 1.2px;
+}
+
+.EDate {
+gap: 2px !important;
+
+    
+}
+
+/* Media Query  */
+
+@media (max-width:767.98px){
+
+}
+
+
+@media (max-width:600px){
+    .ProductInfo .d-flex.mt-2{
+        display: block !important;
+    }
+    .LaunchProductDetail {
+        margin: 15px;
+    }
+    .timeline-content {  
+        width: 90%; 
+        margin-left: 35px;
+    }
+    
+
+}
+@media (max-width:400px){
+    .ProductInfo {
+        border-right: 0px dashed #000;
+       
+    }
+    .timeline-content {
+        display: block;
+        width: 86%;
+        
+    }
+
+}

@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Cormorant:wght@300&family=Kanit:wght@200;400&family=Montserrat+Alternates:ital,wght@0,300;1,400&family=Pacifico&family=Poppins:wght@200&family=Prompt:wght@300;600;700&family=Roboto:wght@100;300;400;500&display=swap');
+
+.WholesaleFormMain{
+    width: 75%;
+    margin: auto;
+    /* border:1px solid #000 */
+}
+input[type="checkbox"] {
+    accent-color: #000;
+}
+
+
+
+.WholesaleFormMain h3{
+    color: #000;
+font-family: "Montserrat";
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 32px; /* 177.778% */
+letter-spacing: 1.8px;
+}
+
+.accountCre h5{
+    color: #000;
+font-family: "Montserrat";
+font-size: 13px;
+font-style: normal;
+font-weight: 500;
+line-height: 32px; /* 246.154% */
+letter-spacing: 1.3px;
+}
+
+.accountCre ul li{
+    color: #000;
+font-family: "Montserrat";
+font-size: 13px;
+font-style: normal;
+font-weight: 500;
+line-height: 32px; /* 246.154% */
+letter-spacing: 1.3px;
+}
+
+.accountCre ul{
+    display: flex;
+    gap:40px;
+} 
+
+.innerInformation{
+    display: flex;
+    gap: 20px;
+    margin: 0 0 50px 0;
+    align-items: center;
+    /* position: relative; */
+    
+}
+
+.labelDivMain{
+    display: flex;
+    /* gap: 20px; */
+    width: 100%;
+}
+
+.labelIN{
+    width: 100%;
+}
+
+.labelIN label{
+    color: #000;
+font-family: "Montserrat";
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 150% */
+}
+
+.labelIN input{
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 0px ;
+    border-left: 0px;
+    border-right: 0px;
+    outline: none;
+    width: 90%;
+}
+
+.labelDetail{
+    margin: 0 0 20px 0;
+}
+
+.labelDetail label{
+    display: flex;
+    gap: 10px;
+}
+
+.labelDetail label{
+    color: #474747;
+font-family: "Montserrat";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: unset;
+display: flex;
+align-items: center;
+}
+
+.labelDetail label input[type="radio"] {
+    fill: #FFF;
+stroke-width: 1px;
+stroke: #000;
+}
+
+
+.LabelContro{
+    width: 100%;
+}
+.LabelContro h3{
+    display: flex;
+    color: #000;
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */ 
+    margin: 0 0 20px 0;
+}
+
+
+.innerInformationRadio{
+    display: flex;
+    gap: 20px;
+}
+
+.labelbox{
+    border: 1px solid #000;
+    padding: 8px 10px;
+}
+
+.innerInformationRadio svg{
+    width: 40px;
+    height: 40px;
+    background: #fff;
+}
+
+.SvgLogo{
+    position: relative;
+}
+
+.SvgLogo::after{
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 57px;
+    background-color: transparent;
+    /* color: #474747; */
+    border: 1px dashed #000;
+    bottom: 0;
+    right: 50%;
+    top: 43px;
+}
+
+
+.SvgLogo1::after{
+    height: 119px;
+}
+
+
+.SvgLogo2::after{
+    height: 103px;
+}
+
+.BySigning{
+    margin: 50px 0;
+}
+
+.BySigning p{
+    color: #403A39;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px; /* 142.857% */
+letter-spacing: 1.12px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.BySigning button{
+    width: 100%;
+    color: #FFF;
+text-align: center;
+font-family: "Montserrat";
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: 32px; /* 213.333% */
+letter-spacing: 1.5px;
+text-transform: uppercase;
+background: #000;
+padding: 10px 0;
+
+}
+
+
+
+
+.detailFilling input[type="radio"], .detailFilling input[type="radio"]:checked{
+    width: 16px;
+    height: 16px;
+    /* top: 30%; */
+  }
+  
+  .detailFilling input[type="radio"] {
+    padding: 0;
+    border: 5px solid #000000;
+    /* margin-right: 16px; */
+  }
+  
+  .detailFilling input[type="radio"]:checked {
+    border: 8px solid #000;
+  }
+  
+  
+  .active{
+    color: #000;
+  }
+  .title .active{
+    color: #000 !important;
+  }
+
+  
+.detailFilling input[type="radio"]:checked:after, .detailFilling input[type="radio"]:not(:checked):before{
+    width: 16px;
+    height: 16px;
+    border-radius: 15px;
+    background-color: #ffffff;;
+    content: "";
+    display: inline-block;
+    visibility: visible;
+  }
+  
+  .detailFilling input[type="radio"]:checked:after {
+    border: 4px solid #000;
+    transition: 0.5s;
+  }
+  .detailFilling input[type="radio"]:not(:checked):before {
+    border: 1px solid #000000;
+    transition: 0.5s;
+  }
+
+  .accountCre {
+    margin-bottom: 50px;
+}
+  
+
+/* Media Query */
+  @media (max-width:600px){
+    .SvgLogo1::after{
+        height: auto  !important ;
+    }
+    .SvgLogo2::after{
+        height: 52% ;
+    }
+    
+    .accountCre ul{
+        display: block;
+        
+    } 
+    .labelDivMain{
+        display:block;        
+        
+    }
+    .SvgLogo{
+        position: relative;
+        bottom: 30px;
+    }
+
+}
