@@ -5,32 +5,41 @@ import FooterBfsg from "../pages/FooterBfsg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getManufactuersDetails } from "../lib/store";
 import { originAPi } from "../lib/store";
+import LoadingSpinner from "../Components/Loader/Loader";
 
 function BrandsAll() {
   const [data, setData] = useState(() => {
-    // Load data from localStorage if it exists
+    // Load data from localStorage initially
     const savedData = localStorage.getItem("/brandData");
     return savedData ? JSON.parse(savedData) : null;
   });
 
-  const getData = async () => {
+  const [loading, setLoading] = useState(true); // Show loading spinner until API call is complete
+
+  const fetchAndUpdateData = async () => {
     try {
-      const user = await getManufactuersDetails();
-      if (user?.data) {
-        console.log({ user });
-        setData(user.data); // Update state
-        localStorage.setItem("/brandData", JSON.stringify(user.data)); // Save to localStorage
+      const response = await getManufactuersDetails();
+      if (response?.data) {
+        const savedData = localStorage.getItem("/brandData");
+        const parsedSavedData = savedData ? JSON.parse(savedData) : null;
+
+        // Compare fetched data with the data in localStorage
+        if (JSON.stringify(parsedSavedData) !== JSON.stringify(response.data)) {
+          localStorage.setItem("/brandData", JSON.stringify(response.data)); // Update localStorage
+          setData(response.data); // Update state with new data
+        }
       }
     } catch (error) {
       console.error("Error fetching brand data:", error);
+    } finally {
+      setLoading(false); // Hide loading spinner
     }
   };
 
   useEffect(() => {
-    if (!data) {
-      getData(); // Fetch only if data isn't in local storage
-    }
-  }, [data]);
+    
+    fetchAndUpdateData();
+  }, []); 
 
   useEffect(() => {
     document.title = "Brands | Beauty Fashion Sales Group ";
@@ -39,28 +48,38 @@ function BrandsAll() {
   return (
     <div>
       <NavbarHeader />
-
-      <section className="B3bPageTop">
-        <div className="container">
-          <div>
-            <div className="row">
-              {data?.map((item) => (
-                <div className="col-lg-3 col-md-3 col-sm-6 p-0" key={item.Tittle__c}>
-                  <Link to={`/brands/${item.Tittle__c}`}>
-                    <div className="BrandProduct BB BR">
-                      <div>
-                        <img src={`${originAPi}${item?.Image_1__c}`} alt="img" />
+      {loading && !data ? (
+        // Show spinner if data is loading and there's no cached data
+        <LoadingSpinner />
+      ) : (
+        // Show content
+        <section className="B3bPageTop">
+          <div className="container">
+            <div>
+              <div className="row">
+                {data?.map((item) => (
+                  <div
+                    className="col-lg-3 col-md-3 col-sm-6 p-0"
+                    key={item.Tittle__c}
+                  >
+                    <Link to={`/brands/${item.Tittle__c}`}>
+                      <div className="BrandProduct BB BR">
+                        <div>
+                          <img
+                            src={`${originAPi}${item?.Image_1__c}`}
+                            alt="img"
+                          />
+                        </div>
+                        <h2>{item?.Tittle__c}</h2>
                       </div>
-                      <h2>{item?.Tittle__c}</h2>
-                    </div>
-                  </Link>
-                </div>
-              ))}
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      )}
       <FooterBfsg />
     </div>
   );

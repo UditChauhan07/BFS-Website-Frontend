@@ -5,7 +5,7 @@ export const originAPi = `http://localhost:3001`
 
 export const getManufactuersDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/brand-data` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/brand-data` , {
             
             if(result){
                 console.log({result})
@@ -23,7 +23,7 @@ export const getManufactuersDetails = async()=>{
 
 export const getManufactuersPageDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/brand-slug-data` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/brand-slug-data` , {
             
             if(result){
                 console.log({result})
@@ -40,7 +40,7 @@ export const getManufactuersPageDetails = async()=>{
 } 
 export const topProductDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/topProduct-data` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/topProduct-data` , {
             
             if(result){
                 console.log({result})
@@ -58,7 +58,7 @@ export const topProductDetails = async()=>{
 
 export const skinCareDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/skincare` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/skincare` , {
             
             if(result){
                 console.log({result})
@@ -75,7 +75,7 @@ export const skinCareDetails = async()=>{
 }
 export const makeupDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/makeup` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/makeup` , {
             
             if(result){
                 console.log({result})
@@ -92,7 +92,7 @@ export const makeupDetails = async()=>{
 }
 export const fragranceDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/Fragrance` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/Fragrance` , {
             
             if(result){
                 console.log({result})
@@ -109,7 +109,7 @@ export const fragranceDetails = async()=>{
 }
 export const bodyDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/body` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/body` , {
             
             if(result){
                 console.log({result})
@@ -126,7 +126,7 @@ export const bodyDetails = async()=>{
 }
 export const decorDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/decor` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/decor` , {
             
             if(result){
                 console.log({result})
@@ -143,7 +143,7 @@ export const decorDetails = async()=>{
 }
 export const hairCareDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/haircare` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/haircare` , {
             
             if(result){
                 console.log({result})
@@ -160,7 +160,58 @@ export const hairCareDetails = async()=>{
 }
 export const catogeryDetails = async()=>{
     try {
-        let result = await axios.post(`${originAPi}/BFSG/brand-Catogery` , {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/brand-Catogery` , {
+            
+            if(result){
+                console.log({result})
+            }
+
+        })
+        return result 
+        
+    } catch (error) {
+        console.log(error )
+        
+    }
+
+}
+export const newArrivals = async()=>{
+    try {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/NewArrivals` , {
+            
+            if(result){
+                console.log({result})
+            }
+
+        })
+        return result 
+        
+    } catch (error) {
+        console.log(error )
+        
+    }
+
+}
+export const retailers = async()=>{
+    try {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/retailer` , {
+            
+            if(result){
+                console.log({result})
+            }
+
+        })
+        return result 
+        
+    } catch (error) {
+        console.log(error )
+        
+    }
+
+}
+export const testimonials = async()=>{
+    try {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/testimonials` , {
             
             if(result){
                 console.log({result})

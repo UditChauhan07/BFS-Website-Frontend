@@ -2,15 +2,12 @@ import React from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import Victoria from "../Image/B2B-Website-UI/victoria.png";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
-import Jodan from "../Image/Store-Image/FWRD Pop Up.png";
-import Lily from "../Image/Store-Image/KITH.png";
-import Patricia from "../Image/Store-Image/Elyse Walker.png";
-import hotel from "../Image/Store-Image/Windsor Court Hotel.png";
 
-function sliderr() {
+import { originAPi } from "../lib/store";
+function sliderr({retailerData}) {
   const options = {
     loop: true,
     margin: 50,
@@ -44,38 +41,20 @@ function sliderr() {
         <h3>OUR Retailers</h3>
 
         <OwlCarousel className="owl-theme" {...options}>
-          <div class="item">
-            <div>
-              <div className="RetailerContent">
-                <img src={Jodan} />
-                <h4>FWRD PopUp</h4>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div>
-              <div className="RetailerContent">
-                <img src={Lily} />
-                <h4>KITH</h4>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div>
-              <div className="RetailerContent">
-                <img src={Patricia} />
-                <h4>Elyse Walker</h4>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div>
-              <div className="RetailerContent">
-                <img src={hotel} />
-                <h4>Windsor Court Hotel</h4>
-              </div>
-            </div>
-          </div>
+        {retailerData?.map((item)=>(
+      <div class="item">
+    
+      <div>
+        <div className="RetailerContent">
+        <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />
+          <h4>{item?.Tittle__c}</h4>
+        </div>
+      </div>
+         
+    
+    </div>
+       ))}
+        
         </OwlCarousel>
       </Container>
     </div>

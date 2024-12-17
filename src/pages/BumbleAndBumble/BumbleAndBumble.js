@@ -150,7 +150,7 @@ Glamour Beauty Awards 2019
                 <div>
                   <div className="ArriavalsInnerContent">
                     <h4>Thickening Dryspun Texture Spray</h4>
-                    <p>Allure Best of Beauty 2019</p>
+                    <p> </p>
                     <a href="https://portal.beautyfashionsales.com/">
                       Shop The Collection
                     </a>

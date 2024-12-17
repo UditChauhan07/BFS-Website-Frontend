@@ -3,16 +3,9 @@ import NavbarHeader from "../pages/Navbar";
 import FooterBfsg from "../pages/FooterBfsg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import SkinCare1 from "../Image/MAKEUP/BobbiBro.png";
-import SkinCare2 from "../Image/MAKEUP/TERRY.png";
-import SkinCare3 from "../Image/MAKEUP/LAUDER.png";
-import SkinCare4 from "../Image/MAKEUP/KEVYN.png";
-import SkinCare7 from "../Image/MAKEUP/RMSBEAUTY.png";
 
-import SkinCare6 from "../Image/MAKEUP/Smashbox.png";
-import SkinCare8 from "../Image/MAKEUP/SKLBlack.png";
-import HeroBannerMakeup from "../Image/MAKEUP/MakeUpBanner.png";
-import { makeupDetails , originAPi } from "../lib/store";
+import { makeupDetails , originAPi , catogeryDetails } from "../lib/store";
+import LoadingSpinner from "../Components/Loader/Loader";
 function Makeup() {
   useEffect(() => {
     document.title =
@@ -24,6 +17,12 @@ function Makeup() {
       const savedData = localStorage.getItem("/makeup");
       return savedData ? JSON.parse(savedData) : null;
     });
+     const [cData, setCData] = useState(() => {
+        // Load category data from localStorage if it exists
+        const savedData = localStorage.getItem("/catogery");
+        return savedData ? JSON.parse(savedData) : null;
+      });
+      const [loading, setLoading] = useState(!(data && cData)); 
   
     const getData = async () => {
       try {
@@ -39,13 +38,32 @@ function Makeup() {
             localStorage.setItem("/makeup", JSON.stringify(user.data)); // Save updated data to localStorage
           }
         }
+        const categoryResponse = await catogeryDetails();
+        if (categoryResponse?.data) {
+          const savedCategoryData = localStorage.getItem("/catogery");
+          const parsedCategoryData = savedCategoryData
+            ? JSON.parse(savedCategoryData)
+            : null;
+  
+          if (JSON.stringify(parsedCategoryData) !== JSON.stringify(categoryResponse.data)) {
+            setCData(categoryResponse.data);
+            localStorage.setItem("/catogery", JSON.stringify(categoryResponse.data));
+          } else {
+            setCData(parsedCategoryData);
+          }
+        }
       } catch (error) {
         console.error("Error fetching brand data:", error);
+      }
+      finally{
+        setLoading(false)
       }
     };
   
     useEffect(() => {
-      getData(); // Fetch data on component mount
+   
+        getData();
+      
     }, []);
   return (
     <div>
@@ -53,10 +71,15 @@ function Makeup() {
 
       <section className="B3bPageTop Makeup">
         <div className="container">
-          <div className="HeroBanner">
-            <img src={HeroBannerMakeup} alt="" />
-            <h3>Makeup</h3>
-          </div>
+          {loading  ? (<LoadingSpinner/>) : ( <>
+            {cData
+                           ?.filter((item) => item?.Tittle__c === "Makeup")
+                           .map((item) => (
+                             <div className="HeroBanner" key={item?.Id}>
+                               <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />
+                               <h3>{item?.Tittle__c}</h3>
+                             </div>
+                           ))}
 
           <div>
             <div className="row g-0">
@@ -77,6 +100,8 @@ function Makeup() {
 
            </div>
           </div>
+           </>)}
+          
         </div>
       </section>
 

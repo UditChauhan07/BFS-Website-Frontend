@@ -13,9 +13,9 @@ import NewArriwal06 from "../Image/B2B-Website-UI/06.png";
 import NewArriwal07 from "../Image/B2B-Website-UI/07.png";
 import NewArriwal08 from "../Image/B2B-Website-UI/08.png";
 import NewArriwal09 from "../Image/B2B-Website-UI/09.png";
-
+import { newArrivals , originAPi } from "../lib/store";
 import { Link as ScrollLink } from "react-scroll";
-function Sliderr() {
+function Sliderr({data}) {
   const scrollTop = useRef();
   
 
@@ -58,6 +58,20 @@ function Sliderr() {
     });
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
       <div id="newarrivals" className="NewArriavalsList">
@@ -65,133 +79,27 @@ function Sliderr() {
           <h3>New Arrivals</h3>
 
           <OwlCarousel className="owl-theme" {...options}>
+          {data?.map((item)=>(
             <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>Bobbi Brown</h4>
-                  <p>Soothing Cleansing Oil Upgrade</p>
+            
+ <div>
+ <div className="ArriavalsInnerContent">
+   <h4>{item?.Tittle__c}</h4>
+   <p>Description__c</p>
 
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection
-                  </a>
-                  <div className="fitContent">
-                    <img src={Terry} />
-                  </div>
-                </div>
-              </div>
+   <a href="https://b2b-v3.vercel.app/#/login">
+     Shop The Collection
+   </a>
+   <div className="fitContent">
+      <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />
+   </div>
+ </div>
+</div>
+           
+             
             </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>Diptyque</h4>
-                  <p>Fleur de Peau Hair Mist</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection
-                  </a>
-                  <div className="fitContent">
-                    <img src={Victoria} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>Byredo</h4>
-                  <p>Animalique Eau de Parfum</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection{" "}
-                  </a>
-                  <div className="fitContent">
-                    <img src={youngBredo} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>RMS Beauty</h4>
-                  <p>ReDimension Hydra Dew Luminizer</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection{" "}
-                  </a>
-                  <div className="fitContent">
-                    <img src={NewArriwal04} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>Bumble and Bumble</h4>
-                  <p>Illuminated Color 1-Minute Vibrancy Treatment</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection{" "}
-                  </a>
-                  <div className="fitContent">
-                    <img src={NewArriwal05} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>By Terry</h4>
-                  <p>Hyaluronic Glow Setting Mist</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection{" "}
-                  </a>
-                  <div className="fitContent">
-                    <img src={NewArriwal06} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>Kevyyn Aucoin</h4>
-                  <p>Velvet Lip Paint</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection{" "}
-                  </a>
-                  <div className="fitContent">
-                    <img src={NewArriwal07} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>Revive</h4>
-                  <p>Fermitif Chin Contour Instant Tightening Peptide Mask</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection{" "}
-                  </a>
-                  <div className="fitContent">
-                    <img src={NewArriwal08} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div>
-                <div className="ArriavalsInnerContent">
-                  <h4>Smashbox</h4>
-                  <p>On Skin Balancing Foundation</p>
-                  <a href="https://b2b-v3.vercel.app/#/login">
-                    Shop The Collection{" "}
-                  </a>
-                  <div className="fitContent">
-                    <img src={NewArriwal09} />
-                  </div>
-                </div>
-              </div>
-            </div>
+               ))}
+           
           </OwlCarousel>
           <span onClick={handleScrollTop} className="circle" ref={scrollTop}>
             <svg

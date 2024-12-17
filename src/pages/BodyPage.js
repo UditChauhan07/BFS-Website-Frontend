@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import HeroBannerBody from "../Image/BodyCare/BodyBanner.png";
 import { bodyDetails , originAPi , catogeryDetails } from "../lib/store";
+import LoadingSpinner from "../Components/Loader/Loader";
 
 function Boby() {
   useEffect(() => {
@@ -22,6 +23,7 @@ function Boby() {
       const savedData = localStorage.getItem("/catogery");
       return savedData ? JSON.parse(savedData) : null;
     });
+    const [loading, setLoading] = useState(!(data && cData)); 
     const getData = async () => {
       try {
         const user = await bodyDetails();
@@ -51,6 +53,9 @@ function Boby() {
       } catch (error) {
         console.error("Error fetching brand data:", error);
       }
+      finally{
+        setLoading(false)
+      }
     };
   
     useEffect(() => {
@@ -62,7 +67,8 @@ function Boby() {
 
       <section className="B3bPageTop Boby">
         <div className="container">
-        {cData
+          {loading ? (<LoadingSpinner/>) : (<>
+            {cData
   ?.filter((item) => item?.Tittle__c === "Body") // Filter items with title 'Skincare'
   .map((item) => (
     <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
@@ -87,6 +93,8 @@ function Boby() {
                          ))}
                        </div>
           </div>
+          </>)}
+     
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { fragranceDetails ,originAPi , catogeryDetails } from "../lib/store";
 
 import HeroBannerFrag from "../Image/Fragrance/FragranceBanner.png";
+import LoadingSpinner from "../Components/Loader/Loader";
 
 function Fragrance() {
   useEffect(() => {
@@ -22,6 +23,7 @@ function Fragrance() {
       const savedData = localStorage.getItem("/catogery");
       return savedData ? JSON.parse(savedData) : null;
     });
+      const [loading, setLoading] = useState(!(data && cData)); 
   
     const getData = async () => {
       try {
@@ -52,6 +54,9 @@ function Fragrance() {
       } catch (error) {
         console.error("Error fetching brand data:", error);
       }
+      finally {
+        setLoading(false); // Stop loading
+      }
     };
   
     useEffect(() => {
@@ -63,7 +68,10 @@ function Fragrance() {
 
       <section className="B3bPageTop Fragrance">
         <div className="container">
-        {cData
+        {loading ? (
+              <LoadingSpinner/>
+            ) : (<>
+                    {cData
   ?.filter((item) => item?.Tittle__c === "Fragrance") // Filter items with title 'Skincare'
   .map((item) => (
     <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
@@ -88,6 +96,8 @@ function Fragrance() {
                            ))}
                          </div>
           </div>
+            </>)}
+
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import SkinCare1 from "../Image/HairCare/BumbleB.png";
 import HeroBannerHair from "../Image/HairCare/HairCareBanner.png";
 import { Link } from "react-router-dom";
 import { hairCareDetails , catogeryDetails ,  originAPi } from "../lib/store";
+import LoadingSpinner from "../Components/Loader/Loader";
 function Haircare() {
   useEffect(() => {
     document.title = 'Haircare by Bumble and Bumble | Beauty Fashion Sales Group ';
@@ -20,6 +21,8 @@ function Haircare() {
       const savedData = localStorage.getItem("/catogery");
       return savedData ? JSON.parse(savedData) : null;
     });
+   
+    const [loading, setLoading] = useState(!(data && cData)); 
 
   const getData = async () => {
     try {
@@ -50,10 +53,13 @@ function Haircare() {
     } catch (error) {
       console.error("Error fetching brand data:", error);
     }
+    finally{
+      setLoading(false)
+    }
   };
 
   useEffect(() => {
-    getData(); // Fetch data on component mount
+    getData(); 
   }, []);
 
   return (
@@ -62,7 +68,7 @@ function Haircare() {
 
       <section className="B3bPageTop HairCare">
         <div className="container">
-          {cData
+          {loading ? (<LoadingSpinner/>) : (<> {cData
             ?.filter((item) => item?.Tittle__c === "Haircare") // Filter items with title 'Skincare'
             .map((item) => (
               <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
@@ -86,7 +92,8 @@ function Haircare() {
                   </div>
                 ))}
               </div>
-          </div>
+          </div></>) }
+          
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import HeroBannerCandle from "../Image/HomeDecor/HomeDecorBanner.png";
 import { decorDetails , originAPi   , catogeryDetails} from "../lib/store";
+import LoadingSpinner from "../Components/Loader/Loader";
 function Candle() {
   useEffect(() => {
     document.title = 'Home Decor by Byredo, Diptyque, Maison Margiela | Beauty Fashion Sales Group ';
@@ -20,6 +21,7 @@ function Candle() {
       const savedData = localStorage.getItem("/catogery");
       return savedData ? JSON.parse(savedData) : null;
     });
+    const [loading, setLoading] = useState(!(data && cData)); 
   
     const getData = async () => {
       try {
@@ -61,6 +63,9 @@ function Candle() {
       } catch (error) {
         console.error("Error fetching brand data:", error);
       }
+      finally{
+setLoading(false)
+      }
     };
   
     useEffect(() => {
@@ -73,7 +78,9 @@ function Candle() {
 
       <section className="B3bPageTop Candle">
         <div className="container">
-        {cData
+          {loading ? (<LoadingSpinner/>) : (<>
+          
+            {cData
   ?.filter((item) => item?.Tittle__c === "Decor") // Filter items with title 'Skincare'
   .map((item) => (
     <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
@@ -97,7 +104,8 @@ function Candle() {
                   </div>
                 ))}
               </div>
-          </div>
+          </div></>) }
+     
         </div>
       </section>
 
