@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const originAPi = `http://localhost:3001`
+export const originAPi = `https://sandbox.beautyfashionsales.com`
 
 
 export const getManufactuersDetails = async()=>{
