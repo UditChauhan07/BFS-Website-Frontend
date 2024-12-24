@@ -4,17 +4,9 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
-import Terry from "../Image/B2B-Website-UI/new-Arrival-bobbi-brown.png";
-import Victoria from "../Image/B2B-Website-UI/new-Arrival-Debtuque.png";
-import youngBredo from "../Image/B2B-Website-UI/youngBredo.png";
-import NewArriwal04 from "../Image/B2B-Website-UI/04.png";
-import NewArriwal05 from "../Image/B2B-Website-UI/05.png";
-import NewArriwal06 from "../Image/B2B-Website-UI/06.png";
-import NewArriwal07 from "../Image/B2B-Website-UI/07.png";
-import NewArriwal08 from "../Image/B2B-Website-UI/08.png";
-import NewArriwal09 from "../Image/B2B-Website-UI/09.png";
-import { newArrivals , originAPi } from "../lib/store";
-import { Link as ScrollLink } from "react-scroll";
+
+import { originAPi } from "../lib/store";
+
 function Sliderr({data}) {
   const scrollTop = useRef();
   
@@ -85,7 +77,7 @@ function Sliderr({data}) {
  <div>
  <div className="ArriavalsInnerContent">
    <h4>{item?.Tittle__c}</h4>
-   <p>Description__c</p>
+   <p>{item?.Description__c}</p>
 
    <a href="https://b2b-v3.vercel.app/#/login">
      Shop The Collection

@@ -9,7 +9,7 @@ import ReViveImg from "../Image/ReVive.png";
 import ByredoImg from "../Image/B2B-Website-UI/ByredoRouge.png";
 import BobbiImg from "../Image/B2B-Website-UI/Bobbi Brown500.png";
 import RmsImg from "../Image/B2B-Website-UI/RMS Beauty500.png";
-import ByTerryWeb from "../Image/B2B-Website-UI/BtTerryMob-updated.png";
+
 import MobDio from "../Image/B2B-Website-UI/MobDiptique.png";
 import MobRevive from "../Image/B2B-Website-UI/Mobrevive.png";
 import MobBobbi from "../Image/B2B-Website-UI/MobBobbi.png";
@@ -17,52 +17,80 @@ import MobMaison from "../Image/B2B-Website-UI/mobMaison.png";
 import MobBydo from "../Image/B2B-Website-UI/Mobbyredo.png";
 import MobBobby from "../Image/B2B-Website-UI/MobBobby.png";
 import MobRms from "../Image/B2B-Website-UI/MobRms.png";
-import BtTerryMob from "../Image/B2B-Website-UI/ByTerryWeb-updated.png";
+
 import eEste from "../Image/B2B-Website-UI/EsteeLaunderWeb.webp";
 import EsteeMob from "../Image/B2B-Website-UI/MobEsteeLaunder.png";
 import SuperGoopWeb from "../Image/B2B-Website-UI/SupergoopWeb.png";
 import SuperGoopMob from "../Image/B2B-Website-UI/SupergoopMob.png";
 import ReNutrivWeb from "../Image/B2B-Website-UI/victoria-beckham-beauty.png";
 import MobReNutriv from "../Image/B2B-Website-UI/victoria-beckham-beauty.png";
-
+import { originAPi } from "../lib/store";
+import { Link } from "react-scroll";
 // import LuxuryMeet from './LuxuryMeet/index'
 
-function BrandsOfB2b() {
+function BrandsOfB2b({data}) {
+  const evenSecData = data.filter(item => item.Sub_tittle__c%2 ===0);
+  const oddSecData = data.filter(item => item.Sub_tittle__c % 2 !==0);
+  console.log({evenSecData})
+  console.log({oddSecData})
+  const groupedData = oddSecData.reduce((acc, item) => {
+    const subTitle = item?.Sub_tittle__c;
+    if (!acc[subTitle]) acc[subTitle] = [];
+    acc[subTitle].push(item);
+    return acc;
+  }, {});
   return (
     <div>
       {/* <LuxuryMeet></LuxuryMeet> */}
       <section className="BrandsOf">
         <Container>
           <section>
-            <div className="row B2bReverseImg">
-              <div className="col-lg-6 col-md-6">
-                <div className="BrandsImg BrandControlCenter MaisonImg ">
-                  <a href="/brands/Supergoop">
-                    <div className="Effect01">
-                      <img
-                        className="WebProducts"
-                        src={SuperGoopWeb}
-                        alt="Supergoop"
-                      />
-                    </div>
-                    <div className="Effect01">
-                      <img
-                        className="MobProducts"
-                        src={SuperGoopMob}
-                        alt="Supergoop"
-                      />
-                    </div>
-                    <h2> Supergoop</h2>
-                  </a>
-                  <p>
-                    As the Experts in SPF™, we've been raising the bar for
-                    effective sunscreen since 2005. 
-                  </p>
+          <div className="row B2bReverseImg">
+    {Object.keys(groupedData).map(subTitle => {
+      const items = groupedData[subTitle];
 
-                  <div className="sectionContent ">
+      return (
+        <React.Fragment key={subTitle}>
+          {/* Render left side for the current subTitle */}
+          {items.filter(item => item?.Extra_Description__c === "left").map(item => (
+            <div className="col-lg-6 col-md-6" key={item?.Id}>
+              <div className="BrandsImg BrandControlCenter MaisonImg">
+                <Link to={`brands/${item?.Tittle__c}`}>
+                  <div className="Effect01">
+                    <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
+                  </div>
+                  <h2>{item?.Tittle__c}</h2>
+                </Link>
+                <p>{item?.Description__c}</p>
+                <div className="sectionContent">
+                  <div className="listHoverLink">
+                    <div className="linkWrap">
+                      <a href="/Wholesale-Inquiries" className="style-4">
+                        <span>Apply Now</span>
+                        <svg viewBox="0 0 13 20">
+                          <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* Render right side for the current subTitle */}
+          {items.filter(item => item?.Extra_Description__c === "right").map(item => (
+            <div className="col-lg-6 col-md-6" key={item?.Id}>
+              <div className="BrandsImg BrandControlLeft BobbiImg">
+                <div className="contentWrite">
+                  <Link to={`brands/${item?.Tittle__c}`}>
+                    <h2>{item?.Tittle__c}</h2>
+                  </Link>
+                  <p>{item?.Description__c}</p>
+                  <div className="sectionContent JustifyStart">
                     <div className="listHoverLink">
                       <div className="linkWrap">
-                        <a href="/Wholesale-Inquiries" class="style-4">
+                        <a href="/Wholesale-Inquiries" className="style-4">
                           <span>Apply Now</span>
                           <svg viewBox="0 0 13 20">
                             <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
@@ -72,56 +100,32 @@ function BrandsOfB2b() {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="col-lg-6 col-md-6">
-                <div className="BrandsImg BrandControlLeft BobbiImg">
-                  <div className="contentWrite">
-                    <a href="/brands/VictoriaBeckhamBeauty">
-                      <h2>Victoria Beckham</h2>
-                    </a>
-                    <p>
-                      Victoria Beckham's brand essence is polished, elevated,
-                      and always in tune with the current moment.
-                    </p>
-
-                    <div className="sectionContent JustifyStart">
-                      <div className="listHoverLink">
-                        <div className="linkWrap">
-                          <a href="/Wholesale-Inquiries" class="style-4">
-                            <span>Apply Now</span>
-                            <svg viewBox="0 0 13 20">
-                              <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                <div className="BrandIm">
+                  <Link to={`brands/${item?.Tittle__c}`}>
+                    <div className="Effect01">
+                      <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
                     </div>
-                  </div>
-                  <div className="BrandIm">
-                    <a href="/brands/VictoriaBeckhamBeauty">
-                      <div className="Effect02">
-                        <img className="WebProducts" src={ReNutrivWeb} />
-                      </div>
-                      <img className="MobProducts " src={MobReNutriv} />
-                    </a>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
+          ))}
+        </React.Fragment>
+      );
+    })}
+  </div>
 
             <div className="row">
-              <div className="col-lg-6 col-md-6">
+          
+      {evenSecData?.filter(item => item?.Extra_Description__c === "left").map((item)=>(  <div className="col-lg-6 col-md-6">
                 <div className="BrandsImg BrandControlLeft ByredoImg">
                   <div className="contentWrite">
                     <a href="/brands/Byredo">
-                      <h2> Byredo</h2>
+                      <h2> {item?.Tittle__c}</h2>
                     </a>
 
                     <p>
-                      Established in 2006 by Ben Gorham in Stockholm, Byredo is
-                      a luxury brand that turns memories into products and
-                      experiences.
+                    {item?.Description__c}
                     </p>
                     <div className="sectionContent JustifyStart">
                       <div className="listHoverLink">
@@ -137,51 +141,52 @@ function BrandsOfB2b() {
                     </div>
                   </div>
                   <div className="BrandIm">
-                    <a href="/brands/Byredo">
-                      <div className="Effect02">
-                        <img className="WebProducts" src={ByredoImg} />
-                      </div>
-                      <img className="MobProducts " src={MobBydo} />
-                    </a>
+                  <Link to={`brands/${item?.Tittle__c}`}>
+      <div className="Effect01">
+         <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
+      </div>
+      </Link>
                   </div>
                 </div>
-              </div>
+              </div>  ))}  
+             
+              {evenSecData?.filter(item => item?.Extra_Description__c === "right").map((item)=>(
 
-              <div className="col-lg-6 col-md-6">
-                <div className="BrandsImg BrandControlCenter DiptyqueImg ">
-                  <a href="/brands/Diptyque">
-                    <div className="BreImm Effect01">
-                      <img className="WebProducts" src={DiptyqueImg} />
-                      <img className="MobProducts " src={MobDio} />
-                    </div>
-                  </a>
-                  <div className="contentWrite">
-                    <a href="/brands/Diptyque">
-                      <h2> Diptyque</h2>
-                    </a>
-                    <p>
-                      Diptyque sees fragrance as an art, a sensory journey
-                      through the mind.
-                    </p>
+<div className="col-lg-6 col-md-6">
+<div className="BrandsImg BrandControlCenter DiptyqueImg ">
+<Link to={`brands/${item?.Tittle__c}`}>
+      <div className="Effect01">
+         <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
+      </div>
+      </Link>
+  <div className="contentWrite">
+    <a href="/brands/Diptyque">
+      <h2> {item?.Tittle__c}</h2>
+    </a>
+    <p>
+     {item?.Description__c}
+    </p>
 
-                    <div className="sectionContent ">
-                      <div className="listHoverLink">
-                        <div className="linkWrap">
-                          <a href="/Wholesale-Inquiries" class="style-4">
-                            <span>Apply Now</span>
-                            <svg viewBox="0 0 13 20">
-                              <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div className="sectionContent ">
+      <div className="listHoverLink">
+        <div className="linkWrap">
+          <a href="/Wholesale-Inquiries" class="style-4">
+            <span>Apply Now</span>
+            <svg viewBox="0 0 13 20">
+              <polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+                 ))}  
+            
             </div>
 
-            <div className="row B2bReverseImg">
+            {/* <div className="row B2bReverseImg">
               <div className="col-lg-6 col-md-6">
                 <div className="BrandsImg BrandControlCenter MaisonImg ">
                   <a href="/brands/MaisonMargiela">
@@ -372,7 +377,7 @@ function BrandsOfB2b() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </section>
         </Container>
       </section>

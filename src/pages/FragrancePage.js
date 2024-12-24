@@ -72,7 +72,7 @@ function Fragrance() {
               <LoadingSpinner/>
             ) : (<>
                     {cData
-  ?.filter((item) => item?.Tittle__c === "Fragrance") // Filter items with title 'Skincare'
+  ?.filter((item) => item?.Sub_tittle__c === "page3") // Filter items with title 'Skincare'
   .map((item) => (
     <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
       <img src={`${originAPi}${item?.Image_1__c}`} alt="" />

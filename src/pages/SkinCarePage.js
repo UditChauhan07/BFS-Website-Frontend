@@ -55,12 +55,12 @@ const Skincare = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 
   useEffect(() => {
-    // Fetch data if not already cached
+    
     
       fetchAndSaveData();
 
@@ -78,7 +78,7 @@ const Skincare = () => {
               <>
                 {/* Render the hero banner */}
                 {cData
-                  ?.filter((item) => item?.Tittle__c === "Skincare")
+                  ?.filter((item) => item?.Sub_tittle__c === "page1")
                   .map((item) => (
                     <div className="HeroBanner" key={item?.Id}>
                       <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />

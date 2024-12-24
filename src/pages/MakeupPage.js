@@ -73,7 +73,7 @@ function Makeup() {
         <div className="container">
           {loading  ? (<LoadingSpinner/>) : ( <>
             {cData
-                           ?.filter((item) => item?.Tittle__c === "Makeup")
+                           ?.filter((item) => item?.Sub_tittle__c === "page2")
                            .map((item) => (
                              <div className="HeroBanner" key={item?.Id}>
                                <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />

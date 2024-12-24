@@ -69,7 +69,7 @@ function Boby() {
         <div className="container">
           {loading ? (<LoadingSpinner/>) : (<>
             {cData
-  ?.filter((item) => item?.Tittle__c === "Body") // Filter items with title 'Skincare'
+  ?.filter((item) => item?.Sub_tittle__c === "page4") // Filter items with title 'Skincare'
   .map((item) => (
     <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
       <img src={`${originAPi}${item?.Image_1__c}`} alt="" />

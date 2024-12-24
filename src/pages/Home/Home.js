@@ -8,7 +8,8 @@ import FooterBfsg from "../FooterBfsg";
 import Testimonial from "../Testimonial/Testimonial";
 // import TopBannerSection from "../TopBannerSection";
 // import LururyPage from '../LuxuryMeet/Luxury'
-import { newArrivals , retailers , testimonials } from "../../lib/store";
+import { newArrivals , retailers , testimonials , getBeautyBrandsList , homePage} from "../../lib/store";
+import LoadingSpinner from "../../Components/Loader/Loader";
 
 const HomeNew = () => {
     const [data, setData] = useState(() => {
@@ -26,7 +27,21 @@ const HomeNew = () => {
         const savedData = localStorage.getItem("/testimonial");
         return savedData ? JSON.parse(savedData) : null;
       });
-      const [loading, setLoading] = useState(!(data)); // Show loader only if no cached data
+      const [beautyBrandsListData, setBeautyBrandsListData] = useState(() => {
+        // Load skincare data from localStorage if it exists
+        const savedData = localStorage.getItem("/beautyBrandsList");
+        return savedData ? JSON.parse(savedData) : null;
+      });
+
+
+      const [homeData, setHomeData] = useState(() => {
+        // Load skincare data from localStorage if it exists
+        const savedData = localStorage.getItem("/homeData");
+        return savedData ? JSON.parse(savedData) : null;
+      });
+
+
+      const [loading, setLoading] = useState(!(data  && retailerData && testimonailData && beautyBrandsListData && homeData)); // Show loader only if no cached data
     
       const fetchAndSaveData = async () => {
         try {
@@ -77,35 +92,74 @@ const HomeNew = () => {
                 setTestimonailData(parsedTestimonialeData);
             }
           }
+
+
+          const beautyBrandsListRes = await getBeautyBrandsList();
+          if (beautyBrandsListRes?.data) {
+            const savedBeautyBrandsListData = localStorage.getItem("/beautyBrandsList");
+            const parsedBeautyBrandListData = savedBeautyBrandsListData
+              ? JSON.parse(savedBeautyBrandsListData)
+              : null;
     
+            if (JSON.stringify(parsedBeautyBrandListData) !== JSON.stringify(beautyBrandsListRes.data)) {
+                setBeautyBrandsListData(beautyBrandsListRes.data);
+              localStorage.setItem("/beautyBrandsList", JSON.stringify(beautyBrandsListRes.data));
+            } else {
+              setBeautyBrandsListData(parsedBeautyBrandListData);
+            }
+          }
+    
+
+          const homeDataRes = await homePage();
+          if (homeDataRes?.data) {
+            const savedHomePageData = localStorage.getItem("/homeData");
+            const parsedHomePageData = savedHomePageData
+              ? JSON.parse(savedHomePageData)
+              : null;
+    
+            if (JSON.stringify(parsedHomePageData) !== JSON.stringify(homeDataRes.data)) {
+              setHomeData(homeDataRes.data);
+              localStorage.setItem("/homeData", JSON.stringify(homeDataRes.data));
+            } else {
+                setHomeData(parsedHomePageData);
+            }
+          }
+
+
+
           
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {
           setLoading(false); // Stop loading
         }
+        
       };
     
       useEffect(() => {
-        // Fetch data if not already cached
-        if (!data || retailerData) {
+    
+       
           fetchAndSaveData();
-        }
+      
       }, []); // Only run on component mount
     return(
         <div>
-            
-            {/* <LururyPage></LururyPage> */}
             <NavbarHeader/>
+          {loading ? <LoadingSpinner/>  :  <>
+           {/* <LururyPage></LururyPage> */}
+          
             {/* <NavScrollExample/> */}
                 {/* <TopBannerSection/> */}
-            <BrandsOfB2b/>
-            <BeautyBrandsList/>
+            <BrandsOfB2b data = {homeData}/>
+            <BeautyBrandsList beautyData ={beautyBrandsListData}/>
           {/* <Sliderr/> */}
             <Arriavals data ={data}/>
             <OurRetailers retailerData = {retailerData}/>
             <Testimonial testimonial = {testimonailData}/>
             <FooterBfsg/>
+          </>}
+            
+           
         </div>
     )
 }

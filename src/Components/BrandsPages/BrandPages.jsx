@@ -26,12 +26,14 @@ function BrandPages() {
     return savedData ? JSON.parse(savedData).filter((item) => item.Tittle__c === slug) : [];
   });
 
-  const [loading, setLoading] = useState(!data.length); // Initialize loading state
+  const [loading, setLoading] = useState(!data.length || !topProductData.length);
   const [isComingSoon, setIsComingSoon] = useState(false);
 
   const getData = async () => {
     try {
-      setLoading(true); // Show loader while fetching data
+
+
+      // Fetch data concurrently
       const [manufacturerResponse, topProductsResponse] = await Promise.all([
         getManufactuersPageDetails(),
         topProductDetails(),
@@ -40,17 +42,21 @@ function BrandPages() {
       const manufacturerData = manufacturerResponse?.data || [];
       const topProducts = topProductsResponse?.data || [];
 
-      // Save API data to localStorage
-      localStorage.setItem("manufacturerData", JSON.stringify(manufacturerData));
-      localStorage.setItem("topProducts", JSON.stringify(topProducts));
+      // Compare with localStorage and update only if different
+      const storedManufacturerData = localStorage.getItem("manufacturerData");
+      const storedTopProducts = localStorage.getItem("topProducts");
 
-      // Filter by slug and update state
-      const filteredManufacturerData = manufacturerData.filter(
-        (item) => item.Tittle__c === slug
-      );
-      const filteredTopProducts = topProducts.filter(
-        (item) => item.Tittle__c === slug
-      );
+      if (
+        JSON.stringify(manufacturerData) !== storedManufacturerData ||
+        JSON.stringify(topProducts) !== storedTopProducts
+      ) {
+        localStorage.setItem("manufacturerData", JSON.stringify(manufacturerData));
+        localStorage.setItem("topProducts", JSON.stringify(topProducts));
+      }
+
+      // Filter and update state
+      const filteredManufacturerData = manufacturerData.filter((item) => item.Tittle__c === slug);
+      const filteredTopProducts = topProducts.filter((item) => item.Tittle__c === slug);
 
       setData(filteredManufacturerData);
       setTopProductData(filteredTopProducts);
@@ -60,16 +66,15 @@ function BrandPages() {
     } catch (error) {
       console.error("Error fetching brand data:", error);
     } finally {
-      setLoading(false); // Hide loader once data is fetched
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (!data.length || !topProductData.length) {
-      getData(); // Fetch data when the component mounts or `slug` changes
-    }
-  }, [slug]);
-
+    
+      getData();
+    
+  }, []);
   const options = {
     loop: true,
     margin: 50,
