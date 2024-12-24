@@ -265,3 +265,23 @@ export const homePage = async()=>{
     }
 
 }
+
+
+export const aboutPage = async()=>{
+    try {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/about-us` , {
+            
+            if(result){
+                console.log({result})
+            }
+
+        })
+        return result 
+        
+    } catch (error) {
+        console.log(error )
+        
+    }
+
+}
+
