@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { getManufactuersDetails } from "../lib/store";
 import { originAPi } from "../lib/store";
 import LoadingSpinner from "../Components/Loader/Loader";
-
+import dummy from '../Image/dummy.png'
 function BrandsAll() {
   const [data, setData] = useState(() => {
     // Load data from localStorage initially
@@ -65,10 +65,10 @@ function BrandsAll() {
                     <Link to={`/brands/${item.Tittle__c}`}>
                       <div className="BrandProduct BB BR">
                         <div>
-                          <img
-                            src={`${originAPi}${item?.Image_1__c}`}
-                            alt="img"
-                          />
+                        <img 
+  src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
+  alt={item?.Tittle__c || 'Dummy Image'} 
+/>
                         </div>
                         <h2>{item?.Tittle__c}</h2>
                       </div>

@@ -7,6 +7,7 @@ import HeroBannerHair from "../Image/HairCare/HairCareBanner.png";
 import { Link } from "react-router-dom";
 import { hairCareDetails , catogeryDetails ,  originAPi } from "../lib/store";
 import LoadingSpinner from "../Components/Loader/Loader";
+import dummy from '../Image/dummy.png'
 function Haircare() {
   useEffect(() => {
     document.title = 'Haircare by Bumble and Bumble | Beauty Fashion Sales Group ';
@@ -69,7 +70,7 @@ function Haircare() {
       <section className="B3bPageTop HairCare">
         <div className="container">
           {loading ? (<LoadingSpinner/>) : (<> {cData
-            ?.filter((item) => item?.Sub_tittle__c === "page6") // Filter items with title 'Skincare'
+            ?.filter((item) => item?.Section_Number__c === "6") // Filter items with title 'Skincare'
             .map((item) => (
               <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
                 <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
@@ -84,7 +85,10 @@ function Haircare() {
                     <Link to={`/brands/${item?.Tittle__c}`}>
                       <div className="BrandProduct BR BB">
                         <div>
-                          <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
+                        <img 
+  src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
+  alt={item?.Tittle__c || 'Dummy Image'} 
+/>
                         </div>
                         <h2>{item?.Tittle__c}</h2>
                       </div>

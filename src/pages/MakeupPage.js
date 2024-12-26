@@ -3,7 +3,7 @@ import NavbarHeader from "../pages/Navbar";
 import FooterBfsg from "../pages/FooterBfsg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-
+import dummy from '../Image/dummy.png'
 import { makeupDetails , originAPi , catogeryDetails } from "../lib/store";
 import LoadingSpinner from "../Components/Loader/Loader";
 function Makeup() {
@@ -73,7 +73,7 @@ function Makeup() {
         <div className="container">
           {loading  ? (<LoadingSpinner/>) : ( <>
             {cData
-                           ?.filter((item) => item?.Sub_tittle__c === "page2")
+                           ?.filter((item) => item?.Section_Number__c === "2")
                            .map((item) => (
                              <div className="HeroBanner" key={item?.Id}>
                                <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />
@@ -88,7 +88,10 @@ function Makeup() {
    <Link to={`/brands/${item?.Tittle__c}`}>
      <div className="BrandProduct BR BB  ">
        <div>
-         <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
+       <img 
+  src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
+  alt={item?.Tittle__c || 'Dummy Image'} 
+/>
        </div>
 
        <h2>{item?.Tittle__c}</h2>

@@ -142,15 +142,16 @@ function NavbarHeader() {
                   <NavLink to="/brands" activeClassName="active">
                     Brands
                   </NavLink>
-                  <li
+                  <NavLink
       className={`newArrival ${isActive ? "active" : ""}`}
-      onClick={(e) => {
-        e.preventDefault();
-        handleNavigateToNewArrivals();
-      }}
+      // onClick={(e) => {
+      //   e.preventDefault();
+      //   handleNavigateToNewArrivals();
+      // }}
+      to="/#newarrivals"
     >
       New Arrivals
-    </li>
+    </NavLink>
 
                   <NavLink to="/founder" activeClassName="active">
                     Founder's Edits
@@ -387,15 +388,16 @@ function NavbarHeader() {
             <li>
               <a href="Brands">BRANDS </a>
             </li>
-            <li
+            <NavLink
       className={`newArrival ${isActive ? "active" : ""}`}
-      onClick={(e) => {
-        e.preventDefault();
-        handleNavigateToNewArrivals();
-      }}
+      // onClick={(e) => {
+      //   e.preventDefault();
+      //   handleNavigateToNewArrivals();
+      // }}
+      to="/#newarrivals"
     >
       New Arrivals
-    </li>
+    </NavLink>
             
             <li>
               {/* <a href="https://b2b-v3.vercel.app/#/create-account">*/}

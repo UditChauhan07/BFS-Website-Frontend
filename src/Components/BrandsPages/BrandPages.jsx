@@ -10,7 +10,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { originAPi } from "../../lib/store";
 import LoadingSpinner from "../Loader/Loader";
-
+import dummy from '../../Image/dummy.png'
 function BrandPages() {
   const params = useParams();
   const slug = params.slug;
@@ -118,11 +118,10 @@ function BrandPages() {
                 <div className="row" key={item.Id}>
                   <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 m-auto">
                     <div className="BnadLogo w-100">
-                      <img
-                        className="img-fluid"
-                        src={`${originAPi}${item?.Image_1__c}`}
-                        alt="Brand Logo"
-                      />
+                    <img 
+  src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
+  alt={item?.Tittle__c || 'Dummy Image'} 
+/>
                     </div>
                   </div>
                   <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 m-auto ">
