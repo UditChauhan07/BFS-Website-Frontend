@@ -64,7 +64,7 @@ function BrandsAll() {
                   >
                     <Link to={`/brands/${item.Tittle__c}`}>
                       <div className="BrandProduct BB BR">
-                        <div>
+                        <div className = "BrandProduct___Img">
                         <img 
   src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
   alt={item?.Tittle__c || 'Dummy Image'} 

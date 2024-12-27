@@ -166,6 +166,8 @@ input.w-95 {
   padding: 0;
   transition: 0.75s;
   cursor: pointer;
+  margin: auto;
+  text-align: center;
 }
 .BrandsImg .Effect01::before,
 .BrandIm .Effect02::before {
@@ -367,6 +369,7 @@ input.w-95 {
 
 .BrandProduct div {
   position: relative;
+
 }
 .BrandProduct div::before {
   position: absolute;
@@ -551,6 +554,9 @@ a {
   padding: 18px 18px 9px 18px;
   width: 100%;
   height: 100%;
+  display: grid
+  ;
+      align-items: end;
 }
 .BT {
   border-top: 1px dashed #000;
@@ -583,7 +589,17 @@ a {
 
 .BrandProduct img {
   width: 100%;
+max-height: 300px;
+
+
+  
 }
+/* .BrandProduct___Img{
+  max-width:  327px;
+  max-height: 262px;
+  width: 100%;
+  height: 100%;
+} */
 
 /* iufheriufherw */
 
