@@ -67,6 +67,7 @@ function BrandPages() {
       console.error("Error fetching brand data:", error);
     } finally {
       setLoading(false);
+     
     }
   };
 
@@ -108,68 +109,75 @@ function BrandPages() {
       <div>
         <NavbarHeader />
         {loading ? (
-          // Show loading spinner while fetching data
-          <LoadingSpinner />
-        ) : (
-          <section>
-            <div className="container">
-              <div className="mt-5"></div>
-              {data?.map((item) => (
-                <div className="row" key={item.Id}>
-                  <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 m-auto">
-                    <div className="BnadLogo w-100">
-                    <img 
-  src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
-  alt={item?.Tittle__c || 'Dummy Image'} 
-/>
-                    </div>
-                  </div>
-                  <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 m-auto ">
-                    <div className="row">
-                      <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 borderRight">
-                        <img
-                          className="img-fluid heightWidth"
-                          src={`${originAPi}${item?.Additional_Images__c}`}
-                          alt="Additional"
-                        />
-                      </div>
-                      <div className="col-xl-5 col-lg-6 col-md-12 col-sm-12 m-auto ">
-                        <h1 className="titleWithLogo">{item?.Sub_tittle__c}</h1>
-                      </div>
-                    </div>
-                    <div className="autoHeight" id="ScrollRight">
-                      <p className="seti">{item?.Description__c}</p>
-                      <p className="seti">{item?.Extra_Description__c}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              <div className="TopProducts NewArriavalsList">
-                <h3 className="mt-5">TOP PRODUCTS</h3>
-                <OwlCarousel className="owl-theme" {...options}>
-                  {topProductData.map((item) => (
-                    <div className="item" key={item.Id}>
-                      <div className="ArriavalsInnerContent">
-                        <h4>{item?.Sub_tittle__c}</h4>
-                        <p>{item?.Description__c}</p>
-                        <a href="https://portal.beautyfashionsales.com/">
-                          Shop The Collection
-                        </a>
-                        <div className="fitContent">
-                          <img
-                            src={`${originAPi}${item?.Image_1__c}`}
-                            alt="Top Product"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </OwlCarousel>
+  // Show loading spinner while fetching data
+  <LoadingSpinner />
+) : isComingSoon || (data.length === 0 && topProductData.length === 0) ? (
+  // Show "No Data Available" message if no data for slug
+  <section className="no-data-section text-center py-5">
+    <h2>No Data Available</h2>
+    <p>We couldn't find any information for this brand. Please check back later.</p>
+  </section>
+) : (
+  // Render main content if data exists
+  <section>
+    <div className="container">
+      <div className="mt-5"></div>
+      {data?.map((item) => (
+        <div className="row" key={item.Id}>
+          <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 m-auto">
+            <div className="BnadLogo w-100">
+              <img 
+                src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
+                alt={item?.Tittle__c || 'Dummy Image'} 
+              />
+            </div>
+          </div>
+          <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 m-auto ">
+            <div className="row">
+              <div className="col-xl-7 col-lg-6 col-md-12 col-sm-12 borderRight">
+                <img
+                  className="img-fluid heightWidth"
+                  src={`${originAPi}${item?.Additional_Images__c}`}
+                  alt="Additional"
+                />
+              </div>
+              <div className="col-xl-5 col-lg-6 col-md-12 col-sm-12 m-auto ">
+                <h1 className="titleWithLogo">{item?.Sub_tittle__c}</h1>
               </div>
             </div>
-          </section>
-        )}
+            <div className="autoHeight" id="ScrollRight">
+              <p className="seti">{item?.Description__c}</p>
+              <p className="seti">{item?.Extra_Description__c}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div className="TopProducts NewArriavalsList">
+        <h3 className="mt-5">TOP PRODUCTS</h3>
+        <OwlCarousel className="owl-theme" {...options}>
+          {topProductData.map((item) => (
+            <div className="item" key={item.Id}>
+              <div className="ArriavalsInnerContent">
+                <h4>{item?.Sub_tittle__c}</h4>
+                <p>{item?.Description__c}</p>
+                <a href="https://portal.beautyfashionsales.com/">
+                  Shop The Collection
+                </a>
+                <div className="fitContent">
+                  <img
+                    src={`${originAPi}${item?.Image_1__c}`}
+                    alt="Top Product"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </OwlCarousel>
+      </div>
+    </div>
+  </section>
+)}
 
         <FooterBfsg />
       </div>

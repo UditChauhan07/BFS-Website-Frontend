@@ -19,7 +19,7 @@ function Makeup() {
     });
      const [cData, setCData] = useState(() => {
         // Load category data from localStorage if it exists
-        const savedData = localStorage.getItem("/catogery");
+        const savedData = localStorage.getItem("/MakeupBanner");
         return savedData ? JSON.parse(savedData) : null;
       });
       const [loading, setLoading] = useState(!(data && cData)); 
@@ -27,31 +27,31 @@ function Makeup() {
     const getData = async () => {
       try {
         const user = await makeupDetails();
-        if (user?.data) {
+        if (user?.data?.brands) {
           console.log({ user });
           const savedData = localStorage.getItem("/makeup");
           const parsedSavedData = savedData ? JSON.parse(savedData) : null;
   
           // Compare new data with saved data
-          if (JSON.stringify(parsedSavedData) !== JSON.stringify(user.data)) {
-            setData(user.data); // Update state
-            localStorage.setItem("/makeup", JSON.stringify(user.data)); // Save updated data to localStorage
+          if (JSON.stringify(parsedSavedData) !== JSON.stringify(user?.data?.brands)) {
+            setData(user?.data?.brands); // Update state
+            localStorage.setItem("/makeup", JSON.stringify(user?.data?.brands)); // Save updated data to localStorage
           }
         }
-        const categoryResponse = await catogeryDetails();
-        if (categoryResponse?.data) {
-          const savedCategoryData = localStorage.getItem("/catogery");
+        if (user?.data?.banners) {
+          const savedCategoryData = localStorage.getItem("/MakeupBanner");
           const parsedCategoryData = savedCategoryData
             ? JSON.parse(savedCategoryData)
             : null;
   
-          if (JSON.stringify(parsedCategoryData) !== JSON.stringify(categoryResponse.data)) {
-            setCData(categoryResponse.data);
-            localStorage.setItem("/catogery", JSON.stringify(categoryResponse.data));
+          if (JSON.stringify(parsedCategoryData) !== JSON.stringify(user?.data?.banners)) {
+            setCData(user?.data?.banners);
+            localStorage.setItem("/MakeupBanner", JSON.stringify(user?.data?.banners));
           } else {
             setCData(parsedCategoryData);
           }
         }
+     
       } catch (error) {
         console.error("Error fetching brand data:", error);
       }
@@ -72,9 +72,7 @@ function Makeup() {
       <section className="B3bPageTop Makeup">
         <div className="container">
           {loading  ? (<LoadingSpinner/>) : ( <>
-            {cData
-                           ?.filter((item) => item?.Section_Number__c === "2")
-                           .map((item) => (
+            {cData?.map((item) => (
                              <div className="HeroBanner" key={item?.Id}>
                                <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />
                                <h3>{item?.Tittle__c}</h3>

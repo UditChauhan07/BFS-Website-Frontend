@@ -19,7 +19,7 @@ function Haircare() {
   });
     const [cData, setCData] = useState(() => {
       // Load data from localStorage if it exists
-      const savedData = localStorage.getItem("/catogery");
+      const savedData = localStorage.getItem("/hairCareBanner");
       return savedData ? JSON.parse(savedData) : null;
     });
    
@@ -28,27 +28,27 @@ function Haircare() {
   const getData = async () => {
     try {
       const user = await hairCareDetails();
-      if (user?.data) {
+      if (user?.data?.brands) {
         console.log({ user });
         const savedData = localStorage.getItem("/haircare");
         const parsedSavedData = savedData ? JSON.parse(savedData) : null;
 
         // Compare new data with saved data
-        if (JSON.stringify(parsedSavedData) !== JSON.stringify(user.data)) {
-          setData(user.data); // Update state
-          localStorage.setItem("/haircare", JSON.stringify(user.data)); // Save updated data to localStorage
+        if (JSON.stringify(parsedSavedData) !== JSON.stringify(user?.data?.brands)) {
+          setData(user?.data?.brands); // Update state
+          localStorage.setItem("/haircare", JSON.stringify(user?.data?.brands)); // Save updated data to localStorage
         }
       }
-       const user1 = await catogeryDetails();
-            if (user1?.data) {
-              console.log({ user1 });
-              const savedData1 = localStorage.getItem("/catogery");
+
+            if (user?.data?.banners) {
+           
+              const savedData1 = localStorage.getItem("/hairCareBanner");
               const parsedSavedData1 = savedData1 ? JSON.parse(savedData1) : null;
       
               // Compare new data with saved data
-              if (JSON.stringify(parsedSavedData1) !== JSON.stringify(user1.data)) {
-                setCData(user1.data); // Update state
-                localStorage.setItem("/catogery", JSON.stringify(user1.data)); // Save updated data to localStorage
+              if (JSON.stringify(parsedSavedData1) !== JSON.stringify(user?.data?.banners)) {
+                setCData(user?.data?.banners); // Update state
+                localStorage.setItem("/hairCareBanner", JSON.stringify(user?.data?.banners)); // Save updated data to localStorage
               }
             }
     } catch (error) {
@@ -69,9 +69,7 @@ function Haircare() {
 
       <section className="B3bPageTop HairCare">
         <div className="container">
-          {loading ? (<LoadingSpinner/>) : (<> {cData
-            ?.filter((item) => item?.Section_Number__c === "6") // Filter items with title 'Skincare'
-            .map((item) => (
+          {loading ? (<LoadingSpinner/>) : (<> {cData?.map((item) => (
               <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
                 <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
                 <h3>{item?.Tittle__c}</h3>

@@ -14,7 +14,7 @@ const Skincare = () => {
   });
   const [cData, setCData] = useState(() => {
     // Load category data from localStorage if it exists
-    const savedData = localStorage.getItem("/catogery");
+    const savedData = localStorage.getItem("/skincareBanner");
     return savedData ? JSON.parse(savedData) : null;
   });
   const [loading, setLoading] = useState(!(data && cData)); // Show loader only if no cached data
@@ -23,35 +23,39 @@ const Skincare = () => {
     try {
       // Fetch skincare details
       const skincareResponse = await skinCareDetails();
-      if (skincareResponse?.data) {
+      if (skincareResponse?.data?.brands) {
         const savedSkincareData = localStorage.getItem("/skincare");
         const parsedSkincareData = savedSkincareData
           ? JSON.parse(savedSkincareData)
           : null;
 
-        if (JSON.stringify(parsedSkincareData) !== JSON.stringify(skincareResponse.data)) {
-          setData(skincareResponse.data);
-          localStorage.setItem("/skincare", JSON.stringify(skincareResponse.data));
+        if (JSON.stringify(parsedSkincareData) !== JSON.stringify(skincareResponse?.data?.brands)) {
+          setData(skincareResponse?.data?.brands);
+          localStorage.setItem("/skincare", JSON.stringify(skincareResponse?.data?.brands));
         } else {
           setData(parsedSkincareData);
         }
       }
 
-      // Fetch category details
-      const categoryResponse = await catogeryDetails();
-      if (categoryResponse?.data) {
-        const savedCategoryData = localStorage.getItem("/catogery");
+      if (skincareResponse?.data?.banners) {
+        const savedCategoryData = localStorage.getItem("/skincareBanner");
         const parsedCategoryData = savedCategoryData
           ? JSON.parse(savedCategoryData)
           : null;
 
-        if (JSON.stringify(parsedCategoryData) !== JSON.stringify(categoryResponse.data)) {
-          setCData(categoryResponse.data);
-          localStorage.setItem("/catogery", JSON.stringify(categoryResponse.data));
+        if (JSON.stringify(parsedCategoryData) !== JSON.stringify(skincareResponse?.data?.banners)) {
+          setCData(skincareResponse?.data?.banners);
+          localStorage.setItem("/skincareBanner", JSON.stringify(skincareResponse?.data?.banners));
         } else {
           setCData(parsedCategoryData);
         }
       }
+
+
+
+      
+
+  
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -77,9 +81,7 @@ const Skincare = () => {
             ) : (
               <>
                 {/* Render the hero banner */}
-                {cData
-                  ?.filter((item) => item?.Section_Number__c === "1")
-                  .map((item) => (
+                {cData?.map((item) => (
                     <div className="HeroBanner" key={item?.Id}>
                       <img src={`${originAPi}${item?.Image_1__c}`} alt={item?.Tittle__c} />
                       <h3>{item?.Tittle__c}</h3>

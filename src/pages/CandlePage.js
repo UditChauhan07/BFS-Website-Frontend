@@ -18,7 +18,7 @@ function Candle() {
     });
     const [cData, setCData] = useState(() => {
       // Load data from localStorage if it exists
-      const savedData = localStorage.getItem("/catogery");
+      const savedData = localStorage.getItem("/candelBanner");
       return savedData ? JSON.parse(savedData) : null;
     });
     const [loading, setLoading] = useState(!(data && cData)); 
@@ -26,40 +26,30 @@ function Candle() {
     const getData = async () => {
       try {
         const user = await decorDetails();
-        if (user?.data) {
+        if (user?.data?.brands) {
           console.log({ user });
           const savedData = localStorage.getItem("/decor");
           const parsedSavedData = savedData ? JSON.parse(savedData) : null;
   
           // Compare new data with saved data
-          if (JSON.stringify(parsedSavedData) !== JSON.stringify(user.data)) {
-            setData(user.data); // Update state
-            localStorage.setItem("/decor", JSON.stringify(user.data)); // Save updated data to localStorage
+          if (JSON.stringify(parsedSavedData) !== JSON.stringify(user?.data?.brands)) {
+            setData(user?.data?.brands); // Update state
+            localStorage.setItem("/decor", JSON.stringify(user?.data?.brands)); // Save updated data to localStorage
           }
         }
-        const user1 = await catogeryDetails()
-  if (user1?.data) {
-        console.log({ user1 });
-        const savedData1 = localStorage.getItem("/catogery");
+
+  if (user?.data?.banners) {
+       
+        const savedData1 = localStorage.getItem("/candelBanner");
         const parsedSavedData1 = savedData1 ? JSON.parse(savedData1) : null;
 
         // Compare new data with saved data
-        if (JSON.stringify(parsedSavedData1) !== JSON.stringify(user1.data)) {
-          setCData(user1.data); // Update state
-          localStorage.setItem("/catogery", JSON.stringify(user1.data)); // Save updated data to localStorage
+        if (JSON.stringify(parsedSavedData1) !== JSON.stringify(user?.data?.banners)) {
+          setCData(user?.data?.banners); // Update state
+          localStorage.setItem("/candelBanner", JSON.stringify(user?.data?.banners)); // Save updated data to localStorage
         }
       }
-        if (user1?.data) {
-          console.log({ user1 });
-          const savedData1 = localStorage.getItem("/catogery");
-          const parsedSavedData1 = savedData1 ? JSON.parse(savedData1) : null;
-  
-          // Compare new data with saved data
-          if (JSON.stringify(parsedSavedData1) !== JSON.stringify(user1.data)) {
-            setCData(user1.data); // Update state
-            localStorage.setItem("/catogery", JSON.stringify(user1.data)); // Save updated data to localStorage
-          }
-        }
+      
       } catch (error) {
         console.error("Error fetching brand data:", error);
       }
@@ -80,9 +70,7 @@ setLoading(false)
         <div className="container">
           {loading ? (<LoadingSpinner/>) : (<>
           
-            {cData
-  ?.filter((item) => item?.Section_Number__c === "5") // Filter items with title 'Skincare'
-  .map((item) => (
+            {cData.map((item) => (
     <div className="HeroBanner" key={item?.Id}> {/* Ensure unique key */}
       <img src={`${originAPi}${item?.Image_1__c}`} alt="" />
       <h3>{item?.Tittle__c}</h3>

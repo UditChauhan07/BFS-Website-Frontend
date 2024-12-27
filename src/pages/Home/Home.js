@@ -13,29 +13,29 @@ import LoadingSpinner from "../../Components/Loader/Loader";
 
 const HomeNew = () => {
     const [data, setData] = useState(() => {
-        // Load skincare data from localStorage if it exists
+        
         const savedData = localStorage.getItem("/newArrivals");
         return savedData ? JSON.parse(savedData) : null;
       });
       const [retailerData, setRetailerData] = useState(() => {
-        // Load skincare data from localStorage if it exists
+      
         const savedData = localStorage.getItem("/retailer");
         return savedData ? JSON.parse(savedData) : null;
       });
       const [testimonailData, setTestimonailData] = useState(() => {
-        // Load skincare data from localStorage if it exists
+        
         const savedData = localStorage.getItem("/testimonial");
         return savedData ? JSON.parse(savedData) : null;
       });
       const [beautyBrandsListData, setBeautyBrandsListData] = useState(() => {
-        // Load skincare data from localStorage if it exists
+      
         const savedData = localStorage.getItem("/beautyBrandsList");
         return savedData ? JSON.parse(savedData) : null;
       });
 
 
       const [homeData, setHomeData] = useState(() => {
-        // Load skincare data from localStorage if it exists
+        
         const savedData = localStorage.getItem("/homeData");
         return savedData ? JSON.parse(savedData) : null;
       });
@@ -44,86 +44,88 @@ const HomeNew = () => {
       const [loading, setLoading] = useState(!(data  && retailerData && testimonailData && beautyBrandsListData && homeData)); // Show loader only if no cached data
     
       const fetchAndSaveData = async () => {
-        try {
-          // Fetch skincare details
-          const skincareResponse = await newArrivals();
-          if (skincareResponse?.data) {
+        try {  // Fetch skincare details
+
+
+          const homeDataRes = await homePage();
+          if (homeDataRes?.data?.brands) {
+            const savedHomePageData = localStorage.getItem("/homeData");
+            const parsedHomePageData = savedHomePageData
+              ? JSON.parse(savedHomePageData)
+              : null;
+    
+            if (JSON.stringify(parsedHomePageData) !== JSON.stringify(homeDataRes?.data?.brands)) {
+              setHomeData(homeDataRes?.data?.brands);
+              localStorage.setItem("/homeData", JSON.stringify(homeDataRes?.data?.brands));
+            } else {
+                setHomeData(parsedHomePageData);
+            }
+          }
+          
+          if (homeDataRes?.data?.newArrivals) {
             const savedSkincareData = localStorage.getItem("/newArrivals");
             const parsedSkincareData = savedSkincareData
               ? JSON.parse(savedSkincareData)
               : null;
     
-            if (JSON.stringify(parsedSkincareData) !== JSON.stringify(skincareResponse.data)) {
-              setData(skincareResponse.data);
-              localStorage.setItem("/newArrivals", JSON.stringify(skincareResponse.data));
+            if (JSON.stringify(parsedSkincareData) !== JSON.stringify(homeDataRes?.data?.newArrivals)) {
+              setData(homeDataRes?.data?.newArrivals);
+              localStorage.setItem("/newArrivals", JSON.stringify(homeDataRes?.data?.newArrivals));
             } else {
               setData(parsedSkincareData);
             }
           }
     
           // Fetch category details
-          const getRetailers = await retailers();
-          if (getRetailers?.data) {
+          
+          if (homeDataRes?.data?.retailers) {
             const savedRetailereData = localStorage.getItem("/retailer");
             const parsedRetailerData = savedRetailereData
               ? JSON.parse(savedRetailereData)
               : null;
     
-            if (JSON.stringify(parsedRetailerData) !== JSON.stringify(getRetailers.data)) {
-              setRetailerData(getRetailers.data);
-              localStorage.setItem("/retailer", JSON.stringify(getRetailers.data));
+            if (JSON.stringify(parsedRetailerData) !== JSON.stringify(homeDataRes?.data?.retailers)) {
+              setRetailerData(homeDataRes?.data?.retailers);
+              localStorage.setItem("/retailer", JSON.stringify(homeDataRes?.data?.retailers));
             } else {
                 setRetailerData(parsedRetailerData);
             }
           }
           
 
-          const testimonialRes = await testimonials();
-          if (testimonialRes?.data) {
+         
+          if (homeDataRes?.data?.testimonials) {
             const savedTestimonialeData = localStorage.getItem("/testimonial");
             const parsedTestimonialeData = savedTestimonialeData
               ? JSON.parse(savedTestimonialeData)
               : null;
     
-            if (JSON.stringify(parsedTestimonialeData) !== JSON.stringify(testimonialRes.data)) {
-                setTestimonailData(testimonialRes.data);
-              localStorage.setItem("/testimonial", JSON.stringify(testimonialRes.data));
+            if (JSON.stringify(parsedTestimonialeData) !== JSON.stringify(homeDataRes?.data?.testimonials)) {
+                setTestimonailData(homeDataRes?.data?.testimonials);
+              localStorage.setItem("/testimonial", JSON.stringify(homeDataRes?.data?.testimonials));
             } else {
                 setTestimonailData(parsedTestimonialeData);
             }
           }
 
 
-          const beautyBrandsListRes = await getBeautyBrandsList();
-          if (beautyBrandsListRes?.data) {
+        
+          if (homeDataRes?.data?.beautyBrands) {
             const savedBeautyBrandsListData = localStorage.getItem("/beautyBrandsList");
             const parsedBeautyBrandListData = savedBeautyBrandsListData
               ? JSON.parse(savedBeautyBrandsListData)
               : null;
     
-            if (JSON.stringify(parsedBeautyBrandListData) !== JSON.stringify(beautyBrandsListRes.data)) {
-                setBeautyBrandsListData(beautyBrandsListRes.data);
-              localStorage.setItem("/beautyBrandsList", JSON.stringify(beautyBrandsListRes.data));
+            if (JSON.stringify(parsedBeautyBrandListData) !== JSON.stringify(homeDataRes?.data?.beautyBrands)) {
+                setBeautyBrandsListData(homeDataRes?.data?.beautyBrands);
+              localStorage.setItem("/beautyBrandsList", JSON.stringify(homeDataRes?.data?.beautyBrands));
             } else {
               setBeautyBrandsListData(parsedBeautyBrandListData);
             }
           }
     
 
-          const homeDataRes = await homePage();
-          if (homeDataRes?.data) {
-            const savedHomePageData = localStorage.getItem("/homeData");
-            const parsedHomePageData = savedHomePageData
-              ? JSON.parse(savedHomePageData)
-              : null;
-    
-            if (JSON.stringify(parsedHomePageData) !== JSON.stringify(homeDataRes.data)) {
-              setHomeData(homeDataRes.data);
-              localStorage.setItem("/homeData", JSON.stringify(homeDataRes.data));
-            } else {
-                setHomeData(parsedHomePageData);
-            }
-          }
+          
 
 
 
