@@ -8,7 +8,7 @@ import FooterBfsg from "../FooterBfsg";
 import Testimonial from "../Testimonial/Testimonial";
 // import TopBannerSection from "../TopBannerSection";
 // import LururyPage from '../LuxuryMeet/Luxury'
-import { newArrivals , retailers , testimonials , getBeautyBrandsList , homePage} from "../../lib/store";
+import {  homePage} from "../../lib/store";
 import LoadingSpinner from "../../Components/Loader/Loader";
 
 const HomeNew = () => {

@@ -1,7 +1,7 @@
 import axios from "axios"
 
-export const originAPi = `https://sandbox.beautyfashionsales.com`
-// export const originAPi = `http://localhost:3001`
+// export const originAPi = `https://sandbox.beautyfashionsales.com`
+export const originAPi = `http://localhost:3001`
 
 
 export const getManufactuersDetails = async()=>{
@@ -159,92 +159,8 @@ export const hairCareDetails = async()=>{
     }
 
 }
-export const catogeryDetails = async()=>{
-    try {
-        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/brand-Catogery` , {
-            
-            if(result){
-                console.log({result})
-            }
 
-        })
-        return result 
-        
-    } catch (error) {
-        console.log(error )
-        
-    }
 
-}
-export const newArrivals = async()=>{
-    try {
-        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/NewArrivals` , {
-            
-            if(result){
-                console.log({result})
-            }
-
-        })
-        return result 
-        
-    } catch (error) {
-        console.log(error )
-        
-    }
-
-}
-export const retailers = async()=>{
-    try {
-        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/retailer` , {
-            
-            if(result){
-                console.log({result})
-            }
-
-        })
-        return result 
-        
-    } catch (error) {
-        console.log(error )
-        
-    }
-
-}
-export const testimonials = async()=>{
-    try {
-        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/testimonials` , {
-            
-            if(result){
-                console.log({result})
-            }
-
-        })
-        return result 
-        
-    } catch (error) {
-        console.log(error )
-        
-    }
-
-}
-
-export const getBeautyBrandsList = async()=>{
-    try {
-        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/BeautyBrandsList` , {
-            
-            if(result){
-                console.log({result})
-            }
-
-        })
-        return result 
-        
-    } catch (error) {
-        console.log(error )
-        
-    }
-
-}
 
 
 
