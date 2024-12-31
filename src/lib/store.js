@@ -1,7 +1,7 @@
 import axios from "axios"
 
-// export const originAPi = `https://sandbox.beautyfashionsales.com`
-export const originAPi = `http://localhost:3001`
+export const originAPi = `https://sandbox.beautyfashionsales.com`
+// export const originAPi = `http://localhost:3001`
 
 
 export const getManufactuersDetails = async()=>{
@@ -201,6 +201,24 @@ export const aboutPage = async()=>{
 
 }
 export const termPage = async()=>{
+    try {
+        let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/term&condition` , {
+            
+            if(result){
+                console.log({result})
+            }
+
+        })
+        return result 
+        
+    } catch (error) {
+        console.log(error )
+        
+    }
+
+}
+
+export const tPage = async()=>{
     try {
         let result = await axios.post(`${originAPi}/BFSG/DPXKsK3f2LFI203/term&condition` , {
             
