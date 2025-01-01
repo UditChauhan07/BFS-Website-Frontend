@@ -63,7 +63,10 @@ function BrandsOfB2b({ data }) {
                                     : item?.Tittle__c}
                                 </h2>
                             
-                              <p>{item?.Description__c}</p>
+                               <p title={item?.Description__c}>{item?.Description__c?.length >100 ? `${item.Description__c.substring(0, 70)}..`
+                                      : item?.Description__c}</p>
+                              
+                              
                               <div className="sectionContent">
                                 <div className="listHoverLink">
                                   <div className="linkWrap">
@@ -86,8 +89,10 @@ function BrandsOfB2b({ data }) {
                                       ? `${item.Tittle__c.substring(0, 16)}..`
                                       : item?.Tittle__c}
                                   </h2>
+                                   <p title={item?.Description__c}>{item?.Description__c?.length >100 ? `${item.Description__c.substring(0, 70)}..`
+                                      : item?.Description__c}</p>
                               
-                                <p>{item?.Description__c}</p>
+                              
                                 <div className="sectionContent JustifyStart">
                                   <div className="listHoverLink">
                                     <div className="linkWrap">
