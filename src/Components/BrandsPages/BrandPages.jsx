@@ -16,36 +16,33 @@ function BrandPages() {
   const slug = params.slug;
 
   // Load initial state from local storage
+  const formattedSlug = slug.replace(/_/g, " ");
+
   const [data, setData] = useState(() => {
     const savedData = localStorage.getItem("manufacturerData");
-    return savedData ? JSON.parse(savedData).filter((item) => item.Tittle__c === slug) : [];
+    return savedData ? JSON.parse(savedData).filter((item) => item.Tittle__c === formattedSlug) : [];
   });
-
+  
   const [topProductData, setTopProductData] = useState(() => {
     const savedData = localStorage.getItem("topProducts");
-    return savedData ? JSON.parse(savedData).filter((item) => item.Tittle__c === slug) : [];
+    return savedData ? JSON.parse(savedData).filter((item) => item.Tittle__c === formattedSlug) : [];
   });
-
   const [loading, setLoading] = useState(!data.length || !topProductData.length);
   const [isComingSoon, setIsComingSoon] = useState(false);
 
   const getData = async () => {
     try {
-
-
-      // Fetch data concurrently
       const [manufacturerResponse, topProductsResponse] = await Promise.all([
         getManufactuersPageDetails(),
         topProductDetails(),
       ]);
-
+  
       const manufacturerData = manufacturerResponse?.data || [];
       const topProducts = topProductsResponse?.data || [];
-
-      // Compare with localStorage and update only if different
+  
       const storedManufacturerData = localStorage.getItem("manufacturerData");
       const storedTopProducts = localStorage.getItem("topProducts");
-
+  
       if (
         JSON.stringify(manufacturerData) !== storedManufacturerData ||
         JSON.stringify(topProducts) !== storedTopProducts
@@ -53,23 +50,21 @@ function BrandPages() {
         localStorage.setItem("manufacturerData", JSON.stringify(manufacturerData));
         localStorage.setItem("topProducts", JSON.stringify(topProducts));
       }
-
-      // Filter and update state
-      const filteredManufacturerData = manufacturerData.filter((item) => item.Tittle__c === slug);
-      const filteredTopProducts = topProducts.filter((item) => item.Tittle__c === slug);
-
+  
+      const filteredManufacturerData = manufacturerData.filter((item) => item.Tittle__c === formattedSlug);
+      const filteredTopProducts = topProducts.filter((item) => item.Tittle__c === formattedSlug);
+  
       setData(filteredManufacturerData);
       setTopProductData(filteredTopProducts);
-
-      // Handle "Coming Soon" state
+  
       setIsComingSoon(filteredManufacturerData.length === 0);
     } catch (error) {
       console.error("Error fetching brand data:", error);
     } finally {
       setLoading(false);
-     
     }
   };
+  
 
   useEffect(() => {
     

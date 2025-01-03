@@ -93,7 +93,7 @@ const Skincare = () => {
                     {/* Render skincare products */}
                     {data?.map((item) => (
                       <div className="col-lg-3 col-md-3 col-sm-6" key={item?.Id}>
-                        <Link to={`/brands/${item?.Tittle__c}`}>
+                        <Link to={`/brands/${item.Tittle__c?.replace(/ /g, "_")}`}>
                           <div className="BrandProduct BR BB">
                             <div>
                             <img 

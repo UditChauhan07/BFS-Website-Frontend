@@ -6,7 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { getManufactuersDetails } from "../lib/store";
 import { originAPi } from "../lib/store";
 import LoadingSpinner from "../Components/Loader/Loader";
-import dummy from '../Image/dummy.png'
+import dummy from '../Image/dummy.png';
+
 function BrandsAll() {
   const [data, setData] = useState(() => {
     // Load data from localStorage initially
@@ -37,7 +38,6 @@ function BrandsAll() {
   };
 
   useEffect(() => {
-    
     fetchAndUpdateData();
   }, []); 
 
@@ -62,13 +62,13 @@ function BrandsAll() {
                     className="col-lg-3 col-md-3 col-sm-6 p-0"
                     key={item.Tittle__c}
                   >
-                    <Link to={`/brands/${item.Tittle__c}`}>
+                    <Link to={`/brands/${item.Tittle__c?.replace(/ /g, "_")}`}>
                       <div className="BrandProduct BB BR">
-                        <div className = "BrandProduct___Img">
-                        <img 
-  src={item?.Image_1__c !== null? `${originAPi}${item?.Image_1__c}` : dummy} 
-  alt={item?.Tittle__c || 'Dummy Image'} 
-/>
+                        <div className="BrandProduct___Img">
+                          <img 
+                            src={item?.Image_1__c !== null ? `${originAPi}${item?.Image_1__c}` : dummy} 
+                            alt={item?.Tittle__c || 'Dummy Image'} 
+                          />
                         </div>
                         <h2>{item?.Tittle__c}</h2>
                       </div>

@@ -51,13 +51,13 @@ function BrandsOfB2b({ data }) {
                           {position === (isOdd ? "Left" : "Right") ? (
                             <>
                               
-                                <div className="Effect01" onClick={()=>navigate(`/brands/${item?.Tittle__c}`)}>
+                                <div className="Effect01" onClick={()=>navigate(`/brands/${item.Tittle__c?.replace(/ /g, "_")}`)}>
                                   <img
                                     src={`${originAPi}${item?.Image_1__c}`}
                                     alt={item?.Tittle__c || ""}
                                   />
                                 </div>
-                                <h2 title={item?.Tittle__c}  onClick={()=>navigate(`/brands/${item?.Tittle__c}`)}>
+                                <h2 title={item?.Tittle__c}  onClick={()=>navigate(`/brands/${item.Tittle__c?.replace(/ /g, "_")}`)}>
                                   {item?.Tittle__c?.length > 15
                                     ? `${item.Tittle__c.substring(0, 16)}..`
                                     : item?.Tittle__c}
@@ -84,7 +84,7 @@ function BrandsOfB2b({ data }) {
                             <>
                               <div className="contentWrite">
                                
-                                  <h2 title={item?.Tittle__c}  onClick={()=>navigate(`/brands/${item?.Tittle__c}`)}>
+                                  <h2 title={item?.Tittle__c}  onClick={()=>navigate(`/brands/${item.Tittle__c?.replace(/ /g, "_")}`)}>
                                     {item?.Tittle__c?.length > 15
                                       ? `${item.Tittle__c.substring(0, 16)}..`
                                       : item?.Tittle__c}
@@ -108,7 +108,7 @@ function BrandsOfB2b({ data }) {
                               </div>
                               <div className="BrandIm">
                               
-                                  <div className="Effect01"  onClick={()=>navigate(`/brands/${item?.Tittle__c}`)}>
+                                  <div className="Effect01"  onClick={()=>navigate(`/brands/${item.Tittle__c?.replace(/ /g, "_")}`)}>
                                     <img
                                       src={`${originAPi}${item?.Image_1__c}`}
                                       alt={item?.Tittle__c || ""}
