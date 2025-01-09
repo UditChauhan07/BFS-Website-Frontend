@@ -9,10 +9,14 @@ import { originAPi } from "../lib/store";
 
 function Sliderr({data}) {
   const scrollTop = useRef();
-  
 
-
-
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      window.scrollY > 2800
+        ? (scrollTop.current.style.display = "inline-block")
+        : (scrollTop.current.style.display = "none");
+    });
+  }, []);
 
   const options = {
     loop: true,
@@ -49,21 +53,6 @@ function Sliderr({data}) {
       behavior: "smooth",
     });
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div>
       <div id="newarrivals" className="NewArriavalsList">

@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { originAPi } from "../lib/store";
 
 function BeautyBrandsList({ beautyData }) {
-  const maxLength = 60;
+  const maxLength = 160;
 
   return (
     <div>

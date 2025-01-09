@@ -63,7 +63,7 @@ function BrandsOfB2b({ data }) {
                                     : item?.Tittle__c}
                                 </h2>
                             
-                               <p title={item?.Description__c}>{item?.Description__c?.length >100 ? `${item.Description__c.substring(0, 70)}..`
+                               <p title={item?.Description__c}>{item?.Description__c?.length >150 ? `${item.Description__c.substring(0, 150)}..`
                                       : item?.Description__c}</p>
                               
                               
@@ -89,7 +89,7 @@ function BrandsOfB2b({ data }) {
                                       ? `${item.Tittle__c.substring(0, 16)}..`
                                       : item?.Tittle__c}
                                   </h2>
-                                   <p title={item?.Description__c}>{item?.Description__c?.length >100 ? `${item.Description__c.substring(0, 70)}..`
+                                   <p title={item?.Description__c}>{item?.Description__c?.length >150 ? `${item.Description__c.substring(0, 150)}..`
                                       : item?.Description__c}</p>
                               
                               

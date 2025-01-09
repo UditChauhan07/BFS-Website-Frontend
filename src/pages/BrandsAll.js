@@ -57,13 +57,18 @@ function BrandsAll() {
           <div className="container">
             <div>
               <div className="row">
-                {data?.map((item) => (
-                  <div
+              {data?.map((item, index) => {
+                  // Apply the `bb br` class for the first 3 items, and `bb` for the 4th
+                  const isFourthItem = (index + 1) % 4 === 0;
+                  const itemClass = isFourthItem ? "BB" : "BB BR";
+
+                  return (
+                    <div
                     className="col-lg-3 col-md-3 col-sm-6 p-0"
                     key={item.Tittle__c}
                   >
                     <Link to={`/brands/${item.Tittle__c?.replace(/ /g, "_")}`}>
-                      <div className="BrandProduct BB BR">
+                      <div className={`BrandProduct ${itemClass}`}>
                         <div className="BrandProduct___Img">
                           <img 
                             src={item?.Image_1__c !== null ? `${originAPi}${item?.Image_1__c}` : dummy} 
@@ -74,7 +79,8 @@ function BrandsAll() {
                       </div>
                     </Link>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

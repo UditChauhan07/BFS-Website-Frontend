@@ -10,10 +10,9 @@ import { BiSearchAlt } from "react-icons/bi";
 import BFSG from "../Image/LogoBFSG.svg";
 import Cross from "../Image/B2B-Website-UI/crossIcon.svg";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
-import { NavLink, useNavigate , useLocation  } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import data from "../data.json";
-import '../../src/App.css'
 function NavbarHeader() {
   const [show, setShow] = useState(false);
 
@@ -47,21 +46,6 @@ function NavbarHeader() {
   if (path === "/Wholesale-Inquiries") {
     Wholesale = true;
   }
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleNavigateToNewArrivals = () => {
-    navigate("/#newarrivals"); // Navigate to the NewArrivals page
-    setTimeout(() => {
-      const element = document.getElementById("newarrivals");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the section
-      }
-    }, 0); // Allow DOM to update before scrolling
-  };
-
-  // Check if the current route matches "/#newarrivals"
-  const isActive = location.hash === "#newarrivals";
   return (
     <div className="FixedHeader">
       {/* Modal */}
@@ -142,16 +126,15 @@ function NavbarHeader() {
                   <NavLink to="/brands" activeClassName="active">
                     Brands
                   </NavLink>
-                  <NavLink
-      className={`newArrival ${isActive ? "active" : ""}`}
-      // onClick={(e) => {
-      //   e.preventDefault();
-      //   handleNavigateToNewArrivals();
-      // }}
-      to="/#newarrivals"
-    >
-      New Arrivals
-    </NavLink>
+
+                  <Nav.Link
+                    className="LineHeightCustom"
+                    href="/#newarrivals"
+                    data-rr-ui-event-key="/#newarrivals"
+                  >
+                    New Arrivals
+                  </Nav.Link>
+                  {/* <a href="/#newarrivals" data-rr-ui-event-key="/#newarrivals" class="LineHeightCustom">New Arrivals</a> */}
 
                   <NavLink to="/founder" activeClassName="active">
                     Founder's Edits
@@ -388,17 +371,15 @@ function NavbarHeader() {
             <li>
               <a href="Brands">BRANDS </a>
             </li>
-            <NavLink
-      className={`newArrival ${isActive ? "active" : ""}`}
-      // onClick={(e) => {
-      //   e.preventDefault();
-      //   handleNavigateToNewArrivals();
-      // }}
-      to="/#newarrivals"
-    >
-      New Arrivals
-    </NavLink>
-            
+            <li className="Borderline">
+              <Nav.Link
+                className="LineHeightCustom"
+                href="/#newarrivals"
+                data-rr-ui-event-key="/#newarrivals"
+              >
+                New Arrivals
+              </Nav.Link>
+            </li>
             <li>
               {/* <a href="https://b2b-v3.vercel.app/#/create-account">*/}
               <a href="/Wholesale-Inquiries">Wholesale Inquiries </a>
